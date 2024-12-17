@@ -1,0 +1,86 @@
+#1
+import random
+
+def guess_the_number():
+    number = random.randint(1, 100)  # Компьютер загадывает число от 1 до 100
+    attempts = 0
+    print("Я загадал число от 1 до 100. Попробуй угадать!")
+
+    while True:
+        guess = int(input("Введите ваше предположение: "))
+        attempts += 1
+
+        if guess < number:
+            print("Загаданное число больше.")
+        elif guess > number:
+            print("Загаданное число меньше.")
+        else:
+            print(f"Поздравляю! Вы угадали число {number} за {attempts} попыток.")
+            break
+
+guess_the_number()
+#2
+def group_symbols(input_string):
+    symbols = input_string.split()  # Разделяем строку на символы
+    grouped = []
+    current_group = []
+
+    for symbol in symbols:
+        if not current_group or symbol == current_group[-1]:
+            current_group.append(symbol)
+        else:
+            grouped.append(current_group)
+            current_group = [symbol]
+    
+    if current_group:
+        grouped.append(current_group)
+
+    return grouped
+
+# Пример использования
+input_string = "с с с о о о с с и и и и с к к к а а а а а"
+result = group_symbols(input_string)
+print(result)
+#3
+import random
+
+def card_game():
+    # Создаем колоду карт
+    deck = ['шестерка', 'семерка', 'восьмерка', 'девятка', 'десятка', 'валет', 'дама', 'король', 'туз']
+    values = {'шестерка': 6, 'семерка': 7, 'восьмерка': 8, 'девятка': 9, 'десятка': 10, 
+              'валет': 2, 'дама': 3, 'король': 4, 'туз': 11}
+
+    # Перемешиваем колоду
+    random.shuffle(deck)
+
+    score = 0
+    print("Добро пожаловать в игру с картами!")
+
+    while True:
+        print(f"Ваши текущие очки: {score}")
+        choice = input("Будете брать карту? (y/n): ").lower()
+
+        if choice == 'n':
+            print(f"Игра окончена. Ваши очки: {score}")
+            break
+        elif choice == 'y':
+            if not deck:
+                print("Карты закончились!")
+                break
+
+            card = deck.pop()  # Берем карту из колоды
+            score += values[card]
+            print(f"Вы взяли карту: {card}. Она добавляет {values[card]} очков.")
+
+            if score > 21:
+                print(f"У вас {score} очков. Вы проиграли!")
+                break
+            elif score == 21:
+                print("Поздравляем! Вы набрали 21 очко и выиграли!")
+                break
+        else:
+            print("Пожалуйста, введите 'y' или 'n'.")
+
+    print("Спасибо за игру!")
+
+card_game()
